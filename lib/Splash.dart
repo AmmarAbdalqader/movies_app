@@ -16,8 +16,11 @@ class _SplashState extends State<Splash> {
     super.initState();
     Timer(
       Duration(milliseconds: 1500),
-      () => Get.off(() => HomePage(),
-          duration: Duration(milliseconds: 100), transition: Transition.fade),
+      () => Get.off(
+        () => HomePage(),
+        duration: Duration(milliseconds: 100),
+        transition: Transition.fade,
+      ),
     );
   }
 
