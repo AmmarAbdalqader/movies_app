@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:movies_app/Components/AppBar.dart';
 import 'package:movies_app/Helpers/Models/TrendingShows.dart';
 import 'package:movies_app/Helpers/myColors.dart';
+import 'package:movies_app/Helpers/API_Key.dart';
 import 'package:movies_app/Helpers/Models/TopShows.dart';
 import 'package:get/get.dart';
 import 'package:movies_app/Screens/Details/index.dart';
@@ -15,7 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String _api_key = "k_34u2yim3";
   static const String seeAll = 'See All';
 
   List<TopShows> top250Movies = [];
@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> getTop250Movies() async {
-    String url = "https://imdb-api.com/en/API/Top250Movies/$_api_key";
+    String url = "https://imdb-api.com/en/API/Top250Movies/$api_key";
 
     final response = await http.get(Uri.parse(url));
     print(response.statusCode);
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> getTop250Series() async {
-    String url = "https://imdb-api.com/en/API/Top250TVs/$_api_key";
+    String url = "https://imdb-api.com/en/API/Top250TVs/$api_key";
 
     final response = await http.get(Uri.parse(url));
     print(response.statusCode);
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> getTrendingMovies() async {
-    String url = "https://imdb-api.com/en/API/MostPopularMovies/$_api_key";
+    String url = "https://imdb-api.com/en/API/MostPopularMovies/$api_key";
 
     final response = await http.get(Uri.parse(url));
     print(response.statusCode);
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> getTrendingSeries() async {
-    String url = "https://imdb-api.com/en/API/MostPopularTVs/$_api_key";
+    String url = "https://imdb-api.com/en/API/MostPopularTVs/$api_key";
 
     final response = await http.get(Uri.parse(url));
     print(response.statusCode);

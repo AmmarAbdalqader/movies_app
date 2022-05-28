@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/Components/AppBar.dart';
+import 'package:movies_app/Helpers/API_Key.dart';
 import 'package:movies_app/Helpers/Models/Poster.dart';
-import 'package:movies_app/Helpers/myColors.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 class Details extends StatefulWidget {
@@ -13,8 +13,6 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
-  String _api_key = "k_34u2yim3";
-
   var show = Get.arguments; // Object
 
   List<Poster> BackPosters = [];
@@ -35,7 +33,7 @@ class _DetailsState extends State<Details> {
   }
 
   Future<void> getBackPosters() async {
-    String url = "https://imdb-api.com/en/API/Posters/$_api_key/${show.Id}";
+    String url = "https://imdb-api.com/en/API/Posters/$api_key/${show.Id}";
 
     final response = await http.get(Uri.parse(url));
     print(response.statusCode);
