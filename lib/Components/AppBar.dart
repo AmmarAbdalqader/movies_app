@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/Helpers/myColors.dart';
+import 'package:movies_app/Helpers/Constants/myColors.dart';
 
 AppBar myAppbar = AppBar(
   title: Text('Movies App'),
@@ -8,7 +8,7 @@ AppBar myAppbar = AppBar(
   actions: <Widget>[
     IconButton(
       icon: Icon(
-        Icons.person,
+        Icons.favorite,
         color: Colors.white,
       ),
       onPressed: () {
@@ -26,7 +26,7 @@ Widget NamedAppBar(String _title) {
     actions: <Widget>[
       IconButton(
         icon: Icon(
-          Icons.person,
+          Icons.favorite,
           color: Colors.white,
         ),
         onPressed: () {

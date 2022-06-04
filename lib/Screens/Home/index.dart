@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/Components/AppBar.dart';
+import 'package:movies_app/Helpers/Constants/MyLists.dart';
 import 'package:movies_app/Helpers/Models/TrendingShows.dart';
-import 'package:movies_app/Helpers/myColors.dart';
-import 'package:movies_app/Helpers/API_Key.dart';
+import 'package:movies_app/Helpers/Constants/myColors.dart';
+import 'package:movies_app/Helpers/Constants/API_Key.dart';
 import 'package:movies_app/Helpers/Models/TopShows.dart';
 import 'package:get/get.dart';
 import 'package:movies_app/Screens/Details/index.dart';
@@ -18,85 +19,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   static const String seeAll = 'See All';
 
-  List<TopShows> top250Movies = [];
-  List<TopShows> top250Series = [];
-
-  List<TrendingShows> trendingMovies = [];
-  List<TrendingShows> trendingSeries = [];
-
   bool isLoading = false;
 
   @override
   void initState() {
-    getData();
+    // getData();
     super.initState();
-  }
-
-  void getData() async {
-    setState(() {
-      isLoading = true;
-    });
-    await getTop250Movies();
-    await getTop250Series();
-    await getTrendingMovies();
-    await getTrendingSeries();
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  Future<void> getTop250Movies() async {
-    String url = "https://imdb-api.com/en/API/Top250Movies/$api_key";
-
-    final response = await http.get(Uri.parse(url));
-    print(response.statusCode);
-    setState(() {
-      Map data = json.decode(utf8.decode(response.bodyBytes));
-
-      top250Movies =
-          (data['items'] as List).map((e) => TopShows.fromJson(e)).toList();
-    });
-  }
-
-  Future<void> getTop250Series() async {
-    String url = "https://imdb-api.com/en/API/Top250TVs/$api_key";
-
-    final response = await http.get(Uri.parse(url));
-    print(response.statusCode);
-    setState(() {
-      Map data = json.decode(utf8.decode(response.bodyBytes));
-
-      top250Series =
-          (data['items'] as List).map((e) => TopShows.fromJson(e)).toList();
-    });
-  }
-
-  Future<void> getTrendingMovies() async {
-    String url = "https://imdb-api.com/en/API/MostPopularMovies/$api_key";
-
-    final response = await http.get(Uri.parse(url));
-    print(response.statusCode);
-    setState(() {
-      Map data = json.decode(utf8.decode(response.bodyBytes));
-
-      trendingMovies = (data['items'] as List)
-          .map((e) => TrendingShows.fromJson(e))
-          .toList();
-    });
-  }
-
-  Future<void> getTrendingSeries() async {
-    String url = "https://imdb-api.com/en/API/MostPopularTVs/$api_key";
-
-    final response = await http.get(Uri.parse(url));
-    print(response.statusCode);
-    setState(() {
-      Map data = json.decode(utf8.decode(response.bodyBytes));
-
-      trendingSeries = (data['items'] as List)
-          .map((e) => TrendingShows.fromJson(e))
-          .toList();
-    });
   }
 
   Widget ShowsSliderWidget(List<dynamic> myList) {
@@ -145,13 +73,21 @@ class _HomePageState extends State<HomePage> {
                                   color: yellow,
                                   size: 19,
                                 ),
-                                Text(
-                                  myList[index].IMDbRating,
-                                  style: TextStyle(
-                                    color: white,
-                                    fontSize: 14,
-                                  ),
-                                ),
+                                myList[index].IMDbRating.toString().isNotEmpty
+                                    ? Text(
+                                        myList[index].IMDbRating,
+                                        style: TextStyle(
+                                          color: white,
+                                          fontSize: 14,
+                                        ),
+                                      )
+                                    : Text(
+                                        'TBA',
+                                        style: TextStyle(
+                                          color: white,
+                                          fontSize: 14,
+                                        ),
+                                      ),
                               ],
                             ),
                           ),
@@ -210,7 +146,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: myAppbar,
-      backgroundColor: grey,
+      backgroundColor: greyBG,
       body: isLoading
           ? Center(child: CircularProgressIndicator())
           : Padding(
@@ -222,59 +158,11 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Top Movies',
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Get.to(() => More(),
-                              arguments: top250Movies,
-                              duration: Duration(milliseconds: 700),
-                              transition: Transition.leftToRightWithFade);
-                        },
-                        child: Text(seeAll),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 5),
-                  ShowsSliderWidget(top250Movies),
-                  SizedBox(height: 18),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Top Series',
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Get.to(() => More(),
-                              arguments: top250Series,
-                              duration: Duration(milliseconds: 700),
-                              transition: Transition.leftToRightWithFade);
-                        },
-                        child: Text(seeAll),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 5),
-                  ShowsSliderWidget(top250Series),
-                  SizedBox(height: 18),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
                         'Popular Movies',
                         style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w400,
-                        ),
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400,
+                            color: white),
                       ),
                       TextButton(
                         onPressed: () {
@@ -296,9 +184,9 @@ class _HomePageState extends State<HomePage> {
                       Text(
                         'Popular Series',
                         style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w400,
-                        ),
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400,
+                            color: white),
                       ),
                       TextButton(
                         onPressed: () {
@@ -313,15 +201,58 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: 5),
                   ShowsSliderWidget(trendingSeries),
+                  SizedBox(height: 18),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Top Movies',
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400,
+                            color: white),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Get.to(() => More(),
+                              arguments: top250Movies,
+                              duration: Duration(milliseconds: 700),
+                              transition: Transition.leftToRightWithFade);
+                        },
+                        child: Text(seeAll),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  ShowsSliderWidget(top250Movies),
+                  SizedBox(height: 18),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Top Series',
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400,
+                            color: white),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Get.to(() => More(),
+                              arguments: top250Series,
+                              duration: Duration(milliseconds: 700),
+                              transition: Transition.leftToRightWithFade);
+                        },
+                        child: Text(seeAll),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  ShowsSliderWidget(top250Series),
                   SizedBox(height: 5),
                 ],
               ),
             ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ),
     );
   }
 }

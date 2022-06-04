@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movies_app/Components/AppBar.dart';
-import 'package:movies_app/Helpers/myColors.dart';
+import 'package:movies_app/Helpers/Constants/myColors.dart';
 import 'package:movies_app/Screens/Details/index.dart';
 
 class More extends StatefulWidget {
@@ -25,7 +25,6 @@ class _MoreState extends State<More> {
                   transition: Transition.leftToRightWithFade);
             },
             child: Container(
-              // color: index % 2 == 0 ? Colors.deepPurple : Colors.pinkAccent,
               width: MediaQuery.of(context).size.width,
               height: 185,
               child: Row(
@@ -49,15 +48,15 @@ class _MoreState extends State<More> {
                         children: [
                           Text(
                             myList[index].Title,
-                            style: TextStyle(fontSize: 23),
+                            style: TextStyle(fontSize: 23, color: white),
                           ),
                           Text(
                             myList[index].Year,
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(fontSize: 18, color: white),
                           ),
                           Text(
                             myList[index].Crew,
-                            style: TextStyle(fontSize: 15),
+                            style: TextStyle(fontSize: 15, color: white),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -69,10 +68,7 @@ class _MoreState extends State<More> {
                               ),
                               Text(
                                 ' ' + myList[index].IMDbRating,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                ),
+                                style: TextStyle(fontSize: 18, color: white),
                               ),
                             ],
                           )
@@ -87,7 +83,7 @@ class _MoreState extends State<More> {
         },
         separatorBuilder: (context, index) {
           return Divider(
-            color: black54,
+            color: Colors.white54,
             indent: 8,
             endIndent: 8,
           );
@@ -100,7 +96,7 @@ class _MoreState extends State<More> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: myAppbar,
-      backgroundColor: grey,
+      backgroundColor: greyBG,
       body: Column(
         children: [
           ShowContainer(),
