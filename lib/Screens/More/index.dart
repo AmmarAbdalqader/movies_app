@@ -18,8 +18,8 @@ class _MoreState extends State<More> {
         itemCount: myList.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () {
-              Get.to(() => Details(),
+            onTap: () async {
+              await Get.to(() => Details(),
                   arguments: myList[index],
                   duration: Duration(milliseconds: 700),
                   transition: Transition.leftToRightWithFade);
@@ -48,7 +48,7 @@ class _MoreState extends State<More> {
                         children: [
                           Text(
                             myList[index].Title,
-                            style: TextStyle(fontSize: 23, color: white),
+                            style: TextStyle(fontSize: 20, color: white),
                           ),
                           Text(
                             myList[index].Year,
@@ -66,10 +66,19 @@ class _MoreState extends State<More> {
                                 color: yellow,
                                 size: 23,
                               ),
-                              Text(
-                                ' ' + myList[index].IMDbRating,
-                                style: TextStyle(fontSize: 18, color: white),
-                              ),
+                              myList[index].IMDbRating.toString().isNotEmpty
+                                  ? Text(
+                                      ' ' + myList[index].IMDbRating,
+                                      style:
+                                          TextStyle(fontSize: 18, color: white),
+                                    )
+                                  : Text(
+                                      ' TBA',
+                                      style: TextStyle(
+                                        color: white,
+                                        fontSize: 16,
+                                      ),
+                                    ),
                             ],
                           )
                         ],

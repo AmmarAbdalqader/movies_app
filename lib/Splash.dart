@@ -5,8 +5,6 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:movies_app/Helpers/Constants/API_Key.dart';
 import 'package:movies_app/Helpers/Constants/MyLists.dart';
-import 'package:movies_app/Helpers/Constants/myColors.dart';
-import 'package:movies_app/Helpers/Models/TrendingShows.dart';
 import 'package:movies_app/Screens/Home/index.dart';
 
 import 'Helpers/Models/TopShows.dart';
@@ -20,8 +18,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-
-    Timer(Duration(milliseconds: 1500), () async {
+    Timer(Duration(milliseconds: 1000), () async {
       await getData();
       Get.off(
         () => HomePage(),
@@ -29,18 +26,29 @@ class _SplashState extends State<Splash> {
         transition: Transition.fade,
       );
     });
-    // Get.off(
-    //   () => HomePage(),
-    //   duration: Duration(milliseconds: 100),
-    //   transition: Transition.fade,
-    // );
   }
+
+  // Future<void> getSP() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final List<dynamic> jsonData =
+  //       jsonDecode(prefs.getString('favList') ?? '[]');
+  //   myFav = jsonData
+  //       .map<String, dynamic>((jsonList) {
+  //         return jsonList.map<dynamic>((jsonItem) {
+  //           return TopShows.fromJson(jsonItem);
+  //         }).toList();
+  //       })
+  //       .cast<TrendingShows>()
+  //       .toList();
+  //   setState(() {});
+  // }
 
   Future<void> getData() async {
     await getTop250Movies();
     await getTop250Series();
     await getTrendingMovies();
     await getTrendingSeries();
+    // await getSP();
   }
 
   Future<void> getTop250Movies() async {
@@ -77,9 +85,8 @@ class _SplashState extends State<Splash> {
     setState(() {
       Map data = json.decode(utf8.decode(response.bodyBytes));
 
-      trendingMovies = (data['items'] as List)
-          .map((e) => TrendingShows.fromJson(e))
-          .toList();
+      trendingMovies =
+          (data['items'] as List).map((e) => TopShows.fromJson(e)).toList();
     });
   }
 
@@ -91,9 +98,8 @@ class _SplashState extends State<Splash> {
     setState(() {
       Map data = json.decode(utf8.decode(response.bodyBytes));
 
-      trendingSeries = (data['items'] as List)
-          .map((e) => TrendingShows.fromJson(e))
-          .toList();
+      trendingSeries =
+          (data['items'] as List).map((e) => TopShows.fromJson(e)).toList();
     });
   }
 
