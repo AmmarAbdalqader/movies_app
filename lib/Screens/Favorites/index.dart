@@ -17,35 +17,6 @@ class _FavoritesState extends State<Favorites> {
 
   var list = [];
 
-  @override
-  void initState() {
-    super.initState();
-
-    // getData();
-  }
-
-  // void getData() async {
-  //   setState(() {
-  //     isLoading = true;
-  //   });
-  //   await getSP();
-  //   setState(() {
-  //     isLoading = false;
-  //   });
-  // }
-
-  // Future<void> getSP() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final List<dynamic> jsonData =
-  //       jsonDecode(prefs.getString('favList') ?? '[]');
-  //   list = jsonData.map<List<dynamic>>((jsonList) {
-  //     return jsonList.map<dynamic>((jsonItem) {
-  //       return TrendingShows.fromJson(jsonItem);
-  //     }).toList();
-  //   }).toList();
-  //   setState(() {});
-  // }
-
   Widget ShowContainer() {
     return Expanded(
       child: ListView.separated(
@@ -56,6 +27,7 @@ class _FavoritesState extends State<Favorites> {
             onDismissed: (direction) {
               setState(() {
                 _topShows.updateFav(myFav[index], false);
+                Get.snackbar('Removed from Favourites', '');
               });
             },
             direction: DismissDirection.startToEnd,

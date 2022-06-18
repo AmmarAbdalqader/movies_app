@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:movies_app/Helpers/Models/TopShows.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/Components/AppBar.dart';
 import 'package:movies_app/Helpers/Constants/MyLists.dart';
@@ -7,7 +5,6 @@ import 'package:movies_app/Helpers/Constants/myColors.dart';
 import 'package:get/get.dart';
 import 'package:movies_app/Screens/Details/index.dart';
 import 'package:movies_app/Screens/More/index.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,14 +15,6 @@ class _HomePageState extends State<HomePage> {
   static const String seeAll = 'See All';
 
   bool isLoading = false;
-
-  @override
-  void initState() {
-    super.initState();
-    SharedPreferences.getInstance().then((pref) async {
-      await pref.setString('favList', jsonEncode(myFav));
-    });
-  }
 
   Widget ShowsSliderWidget(List<dynamic> myList) {
     return Container(

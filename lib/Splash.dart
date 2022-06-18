@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:movies_app/Helpers/Constants/API_Key.dart';
 import 'package:movies_app/Helpers/Constants/MyLists.dart';
 import 'package:movies_app/Screens/Home/index.dart';
-
 import 'Helpers/Models/TopShows.dart';
 
 class Splash extends StatefulWidget {
@@ -14,12 +13,24 @@ class Splash extends StatefulWidget {
   _SplashState createState() => _SplashState();
 }
 
-class _SplashState extends State<Splash> {
+class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
+  AnimationController? controller;
+  Animation? animation;
+
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 1000), () async {
-      await getData();
+    getData();
+    controller = AnimationController(
+        duration: Duration(milliseconds: 2350), vsync: this);
+    animation = ColorTween(begin: Colors.pink, end: Colors.deepPurple)
+        .animate(controller!);
+    controller!.forward();
+    controller!.addListener(() {
+      setState(() {});
+    });
+
+    Timer(Duration(seconds: 3), () {
       Get.off(
         () => HomePage(),
         duration: Duration(milliseconds: 100),
@@ -28,27 +39,17 @@ class _SplashState extends State<Splash> {
     });
   }
 
-  // Future<void> getSP() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final List<dynamic> jsonData =
-  //       jsonDecode(prefs.getString('favList') ?? '[]');
-  //   myFav = jsonData
-  //       .map<String, dynamic>((jsonList) {
-  //         return jsonList.map<dynamic>((jsonItem) {
-  //           return TopShows.fromJson(jsonItem);
-  //         }).toList();
-  //       })
-  //       .cast<TrendingShows>()
-  //       .toList();
-  //   setState(() {});
-  // }
+  @override
+  void dispose() {
+    controller!.dispose();
+    super.dispose();
+  }
 
-  Future<void> getData() async {
+  void getData() async {
     await getTop250Movies();
     await getTop250Series();
     await getTrendingMovies();
     await getTrendingSeries();
-    // await getSP();
   }
 
   Future<void> getTop250Movies() async {
@@ -106,9 +107,29 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink,
+      backgroundColor: animation!.value,
       body: Center(
-        child: CircularProgressIndicator(),
+        child: Stack(
+          children: [
+            Icon(
+              Icons.tv_sharp,
+              size: 150,
+              color: Colors.white,
+            ),
+            Positioned(
+              right: 42,
+              top: 40,
+              child: Text(
+                'TV',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 45,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

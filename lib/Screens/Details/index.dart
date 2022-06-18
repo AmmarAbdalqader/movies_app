@@ -8,6 +8,7 @@ import 'package:movies_app/Helpers/Constants/myColors.dart';
 import 'package:movies_app/Helpers/Models/Poster.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:movies_app/Helpers/Models/ShowInfo.dart';
+import 'package:provider/provider.dart';
 
 class Details extends StatefulWidget {
   @override
@@ -16,10 +17,6 @@ class Details extends StatefulWidget {
 
 class _DetailsState extends State<Details> {
   var show = Get.arguments; // Object
-
-  TopShows _topShows = new TopShows();
-
-  // bool isFav = false;
 
   List<Poster> BackPosters = [];
 
@@ -46,17 +43,6 @@ class _DetailsState extends State<Details> {
   void initState() {
     super.initState();
     getData();
-    // myFav.forEach((element) {
-    //   if (show.Id != element.Id) {
-    //     setState(() {
-    //       isFav = false;
-    //     });
-    //   } else {
-    //     setState(() {
-    //       isFav = true;
-    //     });
-    //   }
-    // });
   }
 
   void getData() async {
@@ -400,33 +386,35 @@ class _DetailsState extends State<Details> {
                           SizedBox(
                             height: 10,
                           ),
-                          // Divider(
-                          //   color: Colors.white24,
-                          //   endIndent: 35,
-                          //   thickness: 1,
-                          // ),
                           Row(
                             children: [
                               Expanded(
                                 child: ElevatedButton(
                                   onPressed: () async {
-                                    if (!show.isFav) {
+                                    if (show.isFav) {
                                       setState(() {
-                                        show.isFav = true;
-                                        _topShows.updateFav(show, show.isFav);
-                                        // myFav.add(show);
-                                        // print(myFav.length);
+                                        Provider.of<TopShows>(context,
+                                                listen: false)
+                                            .isFav = true;
+                                        Provider.of<TopShows>(context,
+                                                listen: false)
+                                            .updateFav(show, show.isFav);
+                                        Get.snackbar('Added To Favourites', '');
                                       });
                                     } else {
                                       setState(() {
-                                        show.isFav = false;
-                                        _topShows.updateFav(show, show.isFav);
-                                        // myFav.remove(show);
-                                        // print(myFav.length);
+                                        Provider.of<TopShows>(context,
+                                                listen: false)
+                                            .isFav = false;
+                                        Provider.of<TopShows>(context,
+                                                listen: false)
+                                            .updateFav(show, show.isFav);
+                                        Get.snackbar(
+                                            'Removed from Favourites', '');
                                       });
                                     }
                                   },
-                                  child: Text(!show.isFav
+                                  child: Text(show.isFav
                                       ? 'Add to Favorites'
                                       : 'Remove from Favorites'),
                                   style: ElevatedButton.styleFrom(
