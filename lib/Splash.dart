@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:get/get.dart';
@@ -22,7 +24,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     super.initState();
     getData();
     controller = AnimationController(
-        duration: Duration(milliseconds: 2350), vsync: this);
+        duration: Duration(milliseconds: 2850), vsync: this);
     animation = ColorTween(begin: Colors.pink, end: Colors.deepPurple)
         .animate(controller!);
     controller!.forward();
@@ -30,7 +32,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
       setState(() {});
     });
 
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(milliseconds: 3000), () {
       Get.off(
         () => HomePage(),
         duration: Duration(milliseconds: 100),
@@ -112,18 +114,18 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
         child: Stack(
           children: [
             Icon(
-              Icons.tv_sharp,
-              size: 150,
+              CupertinoIcons.tv,
               color: Colors.white,
+              size: 225,
             ),
             Positioned(
-              right: 42,
-              top: 40,
+              right: 95,
+              top: 85,
               child: Text(
                 'TV',
-                style: TextStyle(
+                style: GoogleFonts.anton(
                   color: Colors.white,
-                  fontSize: 45,
+                  fontSize: 35,
                   fontWeight: FontWeight.w500,
                 ),
               ),

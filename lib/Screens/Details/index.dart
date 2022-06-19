@@ -391,15 +391,18 @@ class _DetailsState extends State<Details> {
                               Expanded(
                                 child: ElevatedButton(
                                   onPressed: () async {
-                                    if (show.isFav) {
+                                    print(show.isFav);
+                                    if (show.isFav == false) {
                                       setState(() {
                                         Provider.of<TopShows>(context,
                                                 listen: false)
                                             .isFav = true;
                                         Provider.of<TopShows>(context,
                                                 listen: false)
-                                            .updateFav(show, show.isFav);
-                                        Get.snackbar('Added To Favourites', '');
+                                            .updateFav(show, true);
+                                        Get.snackbar('Added To Favourites', '',
+                                            duration:
+                                                Duration(milliseconds: 1000));
                                       });
                                     } else {
                                       setState(() {
@@ -408,9 +411,11 @@ class _DetailsState extends State<Details> {
                                             .isFav = false;
                                         Provider.of<TopShows>(context,
                                                 listen: false)
-                                            .updateFav(show, show.isFav);
+                                            .updateFav(show, false);
                                         Get.snackbar(
-                                            'Removed from Favourites', '');
+                                            'Removed from Favourites', '',
+                                            duration:
+                                                Duration(milliseconds: 1000));
                                       });
                                     }
                                   },
