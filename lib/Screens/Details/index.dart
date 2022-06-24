@@ -419,7 +419,7 @@ class _DetailsState extends State<Details> {
                                       });
                                     }
                                   },
-                                  child: Text(show.isFav
+                                  child: Text(!show.isFav
                                       ? 'Add to Favorites'
                                       : 'Remove from Favorites'),
                                   style: ElevatedButton.styleFrom(

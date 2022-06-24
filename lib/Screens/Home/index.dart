@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/Components/AppBar.dart';
+import 'package:movies_app/Components/myDrawer.dart';
 import 'package:movies_app/Helpers/Constants/MyLists.dart';
 import 'package:movies_app/Helpers/Constants/myColors.dart';
 import 'package:get/get.dart';
@@ -133,124 +134,116 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        drawer: Drawer(
-          child: Center(
-              child: Text(
-            'TODO',
-            style: TextStyle(fontSize: 35),
-          )),
-        ),
-        appBar: myAppbar,
-        backgroundColor: greyBG,
-        body: isLoading
-            ? Center(child: CircularProgressIndicator())
-            : Padding(
-                padding: EdgeInsets.only(left: 8.0),
-                child: ListView(
-                  children: [
-                    SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Popular Movies',
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w400,
-                              color: white),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Get.to(() => More(),
-                                arguments: trendingMovies,
-                                duration: Duration(milliseconds: 700),
-                                transition: Transition.leftToRightWithFade);
-                          },
-                          child: Text(seeAll),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 5),
-                    ShowsSliderWidget(trendingMovies),
-                    SizedBox(height: 18),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Popular Series',
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w400,
-                              color: white),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Get.to(() => More(),
-                                arguments: trendingSeries,
-                                duration: Duration(milliseconds: 700),
-                                transition: Transition.leftToRightWithFade);
-                          },
-                          child: Text(seeAll),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 5),
-                    ShowsSliderWidget(trendingSeries),
-                    SizedBox(height: 18),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Top Movies',
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w400,
-                              color: white),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Get.to(() => More(),
-                                arguments: top250Movies,
-                                duration: Duration(milliseconds: 700),
-                                transition: Transition.leftToRightWithFade);
-                          },
-                          child: Text(seeAll),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 5),
-                    ShowsSliderWidget(top250Movies),
-                    SizedBox(height: 18),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Top Series',
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w400,
-                              color: white),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Get.to(() => More(),
-                                arguments: top250Series,
-                                duration: Duration(milliseconds: 700),
-                                transition: Transition.leftToRightWithFade);
-                          },
-                          child: Text(seeAll),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 5),
-                    ShowsSliderWidget(top250Series),
-                    SizedBox(height: 5),
-                  ],
-                ),
+    return Scaffold(
+      drawer: myDrawer,
+      appBar: myAppbar,
+      backgroundColor: greyBG,
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Padding(
+              padding: EdgeInsets.only(left: 8.0),
+              child: ListView(
+                children: [
+                  SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Popular Movies',
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400,
+                            color: white),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Get.to(() => More(),
+                              arguments: trendingMovies,
+                              duration: Duration(milliseconds: 700),
+                              transition: Transition.leftToRightWithFade);
+                        },
+                        child: Text(seeAll),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  ShowsSliderWidget(trendingMovies),
+                  SizedBox(height: 18),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Popular Series',
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400,
+                            color: white),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Get.to(() => More(),
+                              arguments: trendingSeries,
+                              duration: Duration(milliseconds: 700),
+                              transition: Transition.leftToRightWithFade);
+                        },
+                        child: Text(seeAll),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  ShowsSliderWidget(trendingSeries),
+                  SizedBox(height: 18),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Top Movies',
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400,
+                            color: white),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Get.to(() => More(),
+                              arguments: top250Movies,
+                              duration: Duration(milliseconds: 700),
+                              transition: Transition.leftToRightWithFade);
+                        },
+                        child: Text(seeAll),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  ShowsSliderWidget(top250Movies),
+                  SizedBox(height: 18),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Top Series',
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400,
+                            color: white),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Get.to(() => More(),
+                              arguments: top250Series,
+                              duration: Duration(milliseconds: 700),
+                              transition: Transition.leftToRightWithFade);
+                        },
+                        child: Text(seeAll),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  ShowsSliderWidget(top250Series),
+                  SizedBox(height: 5),
+                ],
               ),
-      ),
+            ),
     );
   }
 }

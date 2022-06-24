@@ -6,7 +6,17 @@ import 'package:movies_app/Screens/Favorites/index.dart';
 AppBar myAppbar = AppBar(
   title: Text('Movies App'),
   centerTitle: true,
-  backgroundColor: deepPurple,
+  flexibleSpace: Container(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topRight,
+        end: Alignment.bottomLeft,
+        // stops: [0.1, 0.5, 0.7, 0.9],
+        colors: [Colors.deepPurple, Colors.pink],
+      ),
+    ),
+  ),
+  // backgroundColor: deepPurple,
   actions: <Widget>[
     IconButton(
       icon: Icon(
@@ -29,5 +39,14 @@ Widget NamedAppBar(String _title) {
     title: Text(_title),
     backgroundColor: deepPurple,
     centerTitle: true,
+    flexibleSpace: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [Colors.pink, Colors.deepPurple],
+        ),
+      ),
+    ),
   );
 }

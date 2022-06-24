@@ -22,9 +22,11 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    print('getData');
     getData();
+    print('getData');
     controller = AnimationController(
-        duration: Duration(milliseconds: 2850), vsync: this);
+        duration: Duration(milliseconds: 2750), vsync: this);
     animation = ColorTween(begin: Colors.pink, end: Colors.deepPurple)
         .animate(controller!);
     controller!.forward();
@@ -32,7 +34,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
       setState(() {});
     });
 
-    Timer(Duration(milliseconds: 3000), () {
+    Timer(Duration(milliseconds: 3500), () {
       Get.off(
         () => HomePage(),
         duration: Duration(milliseconds: 100),
@@ -56,6 +58,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 
   Future<void> getTop250Movies() async {
     String url = "https://imdb-api.com/en/API/Top250Movies/$api_key";
+    print(url);
 
     final response = await http.get(Uri.parse(url));
     print(response.statusCode);
