@@ -1,4 +1,4 @@
-import 'package:movies_app/Helpers/Models/TopShows.dart';
+import 'package:movies_app/Models/TopShows.dart';
 
 List<TopShows> top250Movies = [];
 List<TopShows> top250Series = [];

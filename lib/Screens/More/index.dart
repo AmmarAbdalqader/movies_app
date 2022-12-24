@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_app/Components/AppBar.dart';
 import 'package:movies_app/Helpers/Constants/myColors.dart';
 import 'package:movies_app/Screens/Details/index.dart';
 
-class More extends StatefulWidget {
-  @override
-  _MoreState createState() => _MoreState();
-}
-
-class _MoreState extends State<More> {
-  List<dynamic> myList = Get.arguments;
+class More extends StatelessWidget {
+  final List<dynamic> myList = Get.arguments;
 
   Widget ShowContainer() {
     return Expanded(
@@ -48,15 +44,18 @@ class _MoreState extends State<More> {
                         children: [
                           Text(
                             myList[index].Title,
-                            style: TextStyle(fontSize: 20, color: white),
+                            style: GoogleFonts.jockeyOne(
+                                fontSize: 20, color: white),
                           ),
                           Text(
                             myList[index].Year,
-                            style: TextStyle(fontSize: 18, color: white),
+                            style: GoogleFonts.jockeyOne(
+                                fontSize: 18, color: white),
                           ),
                           Text(
                             myList[index].Crew,
-                            style: TextStyle(fontSize: 15, color: white),
+                            style: GoogleFonts.jockeyOne(
+                                fontSize: 15, color: white),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -69,18 +68,18 @@ class _MoreState extends State<More> {
                               myList[index].IMDbRating.toString().isNotEmpty
                                   ? Text(
                                       ' ' + myList[index].IMDbRating,
-                                      style:
-                                          TextStyle(fontSize: 18, color: white),
+                                      style: GoogleFonts.jockeyOne(
+                                          fontSize: 18, color: white),
                                     )
                                   : Text(
                                       ' TBA',
-                                      style: TextStyle(
+                                      style: GoogleFonts.jockeyOne(
                                         color: white,
                                         fontSize: 16,
                                       ),
                                     ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),

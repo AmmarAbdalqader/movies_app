@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_app/Helpers/Constants/myColors.dart';
 import 'package:movies_app/Screens/Favorites/index.dart';
 
@@ -13,8 +14,11 @@ Drawer myDrawer = Drawer(
         colors: [Colors.deepPurple, Colors.pink],
       ),
     ),
-    child: ListView(
+    child: Column(
       children: [
+        SizedBox(
+          height: 15,
+        ),
         Container(
           height: 120,
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 28),
@@ -36,12 +40,12 @@ Drawer myDrawer = Drawer(
                     padding: EdgeInsets.only(top: 12),
                     child: Text(
                       "Ammar",
-                      style: TextStyle(
+                      style: GoogleFonts.jockeyOne(
                         color: white,
                         fontSize: 25,
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ],
@@ -60,7 +64,7 @@ Drawer myDrawer = Drawer(
           ),
           title: Text(
             'Favourites',
-            style: TextStyle(
+            style: GoogleFonts.jockeyOne(
               color: white,
               fontSize: 18,
             ),
@@ -82,18 +86,20 @@ Drawer myDrawer = Drawer(
           ),
           title: Text(
             'Todo',
-            style: TextStyle(
+            style: GoogleFonts.jockeyOne(
               color: white,
               fontSize: 18,
             ),
           ),
           onTap: () {},
         ),
+        Spacer(),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               "Designed by AKA",
-              style: TextStyle(
+              style: GoogleFonts.jockeyOne(
                 color: white,
                 fontSize: 15,
               ),

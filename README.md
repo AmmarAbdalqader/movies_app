@@ -1,4 +1,4 @@
 # movies_app
 
-Flutter SDK version 2.10.4
+Flutter SDK version 3.3.8
 
